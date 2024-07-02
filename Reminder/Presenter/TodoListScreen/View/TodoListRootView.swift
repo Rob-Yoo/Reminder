@@ -6,15 +6,51 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
-class TodoListRootView: UIView {
+final class TodoListRootView: BaseView {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    let titleLabel = UILabel().then {
+        $0.text = "전체"
+        $0.textColor = .systemBlue
+        $0.font = .boldSystemFont(ofSize: 35)
     }
-    */
-
+    
+    let addButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "plus.circle"), for: .normal)
+    }
+    
+    let listTableView = UITableView(frame: .zero, style: .plain).then {
+        $0.rowHeight = 100
+        $0.allowsSelection = false
+        $0.showsVerticalScrollIndicator = false
+        $0.separatorStyle = .none
+        $0.register(TodoListTableViewCell.self, forCellReuseIdentifier: TodoListTableViewCell.reusableIdentifier)
+    }
+    
+    override func configureHierarchy() {
+        self.addSubview(titleLabel)
+        self.addSubview(addButton)
+        self.addSubview(listTableView)
+    }
+    
+    override func configureLayout() {
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
+            make.leading.equalTo(self.safeAreaLayoutGuide).offset(10)
+        }
+        
+        addButton.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-10)
+            make.size.equalTo(60)
+        }
+        
+        listTableView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(10)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
+    }
 }

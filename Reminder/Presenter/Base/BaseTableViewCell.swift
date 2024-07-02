@@ -1,5 +1,5 @@
 //
-//  BaseView.swift
+//  BaseTableViewCell.swift
 //  Reminder
 //
 //  Created by Jinyoung Yoo on 7/2/24.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-class BaseView: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.configureView()
+class BaseTableViewCell: UITableViewCell {
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureHierarchy()
         self.configureLayout()
     }
@@ -21,8 +20,6 @@ class BaseView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureView() {}
     func configureHierarchy() {}
     func configureLayout() {}
-    
 }
