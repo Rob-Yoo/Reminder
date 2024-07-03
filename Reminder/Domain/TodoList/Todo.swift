@@ -13,11 +13,15 @@ final class Todo: Object {
     @Persisted var title: String
     @Persisted var memo: String
     @Persisted var dueDate: String
+    @Persisted var tag: String
+    @Persisted var priority: Int
 
-    convenience init(title: String, memo: String = "", dueDate: String = "") {
+    convenience init(title: String, memo: String, dueDate: String, tag: String, priority: Int) {
         self.init()
         self.title = title
         self.memo = memo
         self.dueDate = dueDate
+        self.tag = tag
+        self.priority = priority
    }
 }

@@ -23,11 +23,13 @@ final class AddRootView: BaseView {
         $0.borderStyle = .line
     }
     
-    let dueDateTextField = UITextField().then {
-        $0.placeholder = "마감일"
-        $0.textColor = .white
-        $0.borderStyle = .line
+    let dueDateOptionView = TodoOptionView(type: .dueDate)
+    
+    let tagOptionView = TodoOptionView(type: .tag).then {
+        $0.contentLabel.textColor = .systemBlue
     }
+    
+    let priorityOptionView = TodoOptionView(type: .priority)
     
     override func configureView() {
         self.backgroundColor = .customBackground
@@ -36,7 +38,9 @@ final class AddRootView: BaseView {
     override func configureHierarchy() {
         self.addSubview(titleTextField)
         self.addSubview(memoTextField)
-        self.addSubview(dueDateTextField)
+        self.addSubview(dueDateOptionView)
+        self.addSubview(tagOptionView)
+        self.addSubview(priorityOptionView)
     }
 
     override func configureLayout() {
@@ -52,8 +56,20 @@ final class AddRootView: BaseView {
             make.height.equalTo(60)
         }
         
-        dueDateTextField.snp.makeConstraints { make in
+        dueDateOptionView.snp.makeConstraints { make in
             make.top.equalTo(memoTextField.snp.bottom).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(60)
+        }
+        
+        tagOptionView.snp.makeConstraints { make in
+            make.top.equalTo(dueDateOptionView.snp.bottom).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(60)
+        }
+        
+        priorityOptionView.snp.makeConstraints { make in
+            make.top.equalTo(tagOptionView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }

@@ -11,7 +11,7 @@ class BaseViewController<ContentView: UIView>: UIViewController {
     
     let contentView: ContentView
     
-    init(contentView: ContentView) {
+    init(contentView: ContentView = ContentView()) {
         self.contentView = contentView
         super.init(nibName: nil, bundle: nil)
     }

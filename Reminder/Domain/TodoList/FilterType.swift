@@ -10,7 +10,7 @@ import Foundation
 enum FilterType {
     case dueDate
     case title
-//    case priority
+    case priority
     
     var title: String {
         switch self {
@@ -18,8 +18,8 @@ enum FilterType {
             return "마감일 순으로 보기"
         case .title:
             return "제목 순으로 보기"
-//        case .priority:
-//            return "우선순위 낮음만 보기"
+        case .priority:
+            return "우선순위 순으로 보기"
         }
     }
 }

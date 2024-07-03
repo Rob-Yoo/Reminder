@@ -12,16 +12,15 @@ import Combine
 final class TodoListModel {
     private let realm = try! Realm()
     @Published var todoList: Results<Todo>
+    var todoBuilder = TodoBuilder()
     
     init() {
         self.todoList = realm.objects(Todo.self)
     }
     
-    func addTodoList(title: String, memo: String, dueDate: String) {
-        let newTodo = Todo(title: title, memo: memo, dueDate: dueDate)
-        
+    func addTodoList(toDo: Todo) {
         try! realm.write {
-            realm.add(newTodo)
+            realm.add(toDo)
         }
     }
     
@@ -39,6 +38,8 @@ final class TodoListModel {
             self.todoList = self.todoList.sorted(by: \.dueDate, ascending: true)
         case .title:
             self.todoList = self.todoList.sorted(by: \.title, ascending: true)
+        case .priority:
+            self.todoList = self.todoList.sorted(by: \.priority, ascending: false)
         }
     }
 }

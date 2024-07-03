@@ -22,7 +22,7 @@ final class TodoListRootView: BaseView {
     }
     
     let listTableView = UITableView(frame: .zero, style: .plain).then {
-        $0.rowHeight = 100
+        $0.rowHeight = 80
         $0.allowsSelection = false
         $0.showsVerticalScrollIndicator = false
         $0.separatorStyle = .none

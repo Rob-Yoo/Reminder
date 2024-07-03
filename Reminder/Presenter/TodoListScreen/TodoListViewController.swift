@@ -7,15 +7,16 @@
 
 import UIKit
 import Combine
+import RealmSwift
 
 final class TodoListViewController: BaseViewController<TodoListRootView> {
     
     private let model: TodoListModel
     private var cancellable = Set<AnyCancellable>()
     
-    init(contentView: TodoListRootView, model: TodoListModel) {
+    init(model: TodoListModel) {
         self.model = model
-        super.init(contentView: contentView)
+        super.init()
     }
     
     override func viewDidLoad() {
@@ -36,8 +37,11 @@ final class TodoListViewController: BaseViewController<TodoListRootView> {
         let titleAction = UIAction(title: FilterType.title.title) { [weak self] _ in
             self?.model.filterTodoList(filterType: .title)
         }
+        let priorityAction = UIAction(title: FilterType.priority.title) { [weak self] _ in
+            self?.model.filterTodoList(filterType: .priority)
+        }
         
-        return UIMenu(children: [dueDateAction, titleAction])
+        return UIMenu(children: [dueDateAction, titleAction, priorityAction])
     }
     
     override func addUserAction() {
@@ -47,7 +51,6 @@ final class TodoListViewController: BaseViewController<TodoListRootView> {
     }
     
     override func observeModel() {
-        // TODO: - 질문하기...
         self.model.$todoList
             .receive(on: RunLoop.main)
             .sink { [weak self] new in
@@ -95,7 +98,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - User Action Handling
 extension TodoListViewController {
     @objc private func addButtonTapped() {
-        let nextVC = AddViewController(contentView: AddRootView(), model: self.model)
+        let nextVC = AddViewController(model: self.model)
         let nav = UINavigationController(rootViewController: nextVC)
         
         self.present(nav, animated: true)
