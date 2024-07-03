@@ -29,6 +29,10 @@ final class TodoListRootView: BaseView {
         $0.register(TodoListTableViewCell.self, forCellReuseIdentifier: TodoListTableViewCell.reusableIdentifier)
     }
     
+    override func configureView() {
+        self.backgroundColor = .black
+    }
+    
     override func configureHierarchy() {
         self.addSubview(titleLabel)
         self.addSubview(addButton)
