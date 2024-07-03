@@ -93,6 +93,14 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         delete.backgroundColor = .red
         return UISwipeActionsConfiguration(actions: [delete])
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let todo = self.model.todoList[indexPath.row]
+        let nextVC = TodoDetailViewController(todo: todo)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 
 //MARK: - User Action Handling

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC324CC42C359EAC009BA31A /* TodoDetailRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC324CC32C359EAC009BA31A /* TodoDetailRootView.swift */; };
+		CC324CC62C359EC5009BA31A /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC324CC52C359EC5009BA31A /* TodoDetailViewController.swift */; };
 		CC85F8E22C33E82000D2B15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85F8E12C33E82000D2B15C /* AppDelegate.swift */; };
 		CC85F8E42C33E82000D2B15C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85F8E32C33E82000D2B15C /* SceneDelegate.swift */; };
 		CC85F8E62C33E82000D2B15C /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85F8E52C33E82000D2B15C /* TodoListViewController.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CC324CC32C359EAC009BA31A /* TodoDetailRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailRootView.swift; sourceTree = "<group>"; };
+		CC324CC52C359EC5009BA31A /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
 		CC85F8DE2C33E82000D2B15C /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC85F8E12C33E82000D2B15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC85F8E32C33E82000D2B15C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			children = (
 				CC85F9012C33F66200D2B15C /* View */,
 				CC85F8E52C33E82000D2B15C /* TodoListViewController.swift */,
+				CC324CC52C359EC5009BA31A /* TodoDetailViewController.swift */,
 			);
 			path = TodoListScreen;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 			children = (
 				CC85F9072C33F7CE00D2B15C /* TodoListRootView.swift */,
 				CC85F90E2C34069700D2B15C /* TodoListTableViewCell.swift */,
+				CC324CC32C359EAC009BA31A /* TodoDetailRootView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -392,7 +398,9 @@
 				CC85F8E22C33E82000D2B15C /* AppDelegate.swift in Sources */,
 				CCA6A07D2C35793A006EE56E /* MainRootView.swift in Sources */,
 				CC85F90A2C33FB8300D2B15C /* TodoListModel.swift in Sources */,
+				CC324CC62C359EC5009BA31A /* TodoDetailViewController.swift in Sources */,
 				CC85F8E42C33E82000D2B15C /* SceneDelegate.swift in Sources */,
+				CC324CC42C359EAC009BA31A /* TodoDetailRootView.swift in Sources */,
 				CCA6A0802C357976006EE56E /* MainModel.swift in Sources */,
 				CCAB370A2C3539B900D65854 /* TagViewController.swift in Sources */,
 				CC85F90F2C34069700D2B15C /* TodoListTableViewCell.swift in Sources */,

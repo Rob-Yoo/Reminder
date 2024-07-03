@@ -90,7 +90,7 @@ final class TodoListTableViewCell: BaseTableViewCell {
     }
     
     func configureCellData(data: Todo) {
-        self.priorityLabel.text = "!" * data.priority // 연산자 오버로딩
+        self.priorityLabel.text = "!" * data.priority
         self.titleLabel.text = data.title
         self.memoLabel.text = data.memo
         self.dueDateLabel.text = data.dueDate
