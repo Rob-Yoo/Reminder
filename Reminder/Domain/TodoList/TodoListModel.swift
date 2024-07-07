@@ -42,4 +42,10 @@ final class TodoListModel {
             self.todoList = self.todoList.sorted(by: \.priority, ascending: false)
         }
     }
+    
+    func updateTodo(value: [String: Any]) {
+        try! realm.write {
+            realm.create(Todo.self, value: value, update: .modified)
+        }
+    }
 }

@@ -15,6 +15,7 @@ final class Todo: Object {
     @Persisted var dueDate: String
     @Persisted var tag: String
     @Persisted var priority: Int
+    @Persisted var isFlag: Bool = false
 
     convenience init(title: String, memo: String, dueDate: String, tag: String, priority: Int) {
         self.init()

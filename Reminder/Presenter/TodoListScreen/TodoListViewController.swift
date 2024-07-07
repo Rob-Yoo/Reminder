@@ -84,13 +84,20 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let data = self.model.todoList[indexPath.row]
+        let flagImage = (data.isFlag) ? "flag.fill" : "flag"
+        let flag = UIContextualAction(style: .normal, title: "깃발") { action, view, completion in
+            self.model.updateTodo(value: ["id": data.id, "isFlag": !data.isFlag])
+        }
+
         let delete = UIContextualAction(style: .destructive, title: "삭제") { action, view, completion in
-            let primaryKey = self.model.todoList[indexPath.row].id
+            let primaryKey = data.id
             self.model.removeTodoList(primaryKey: primaryKey)
         }
         
-        delete.backgroundColor = .red
-        return UISwipeActionsConfiguration(actions: [delete])
+        flag.image = UIImage(systemName: flagImage)
+        flag.backgroundColor = .systemYellow
+        return UISwipeActionsConfiguration(actions: [delete, flag])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
