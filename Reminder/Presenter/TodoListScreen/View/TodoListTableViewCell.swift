@@ -9,12 +9,17 @@ import UIKit
 import SnapKit
 import Then
 
+protocol TodoListTableViewCellDelegate: AnyObject {
+    func completeButtonViewTapped(idx: Int)
+}
+
 final class TodoListTableViewCell: BaseTableViewCell {
     
-    private let circleView = UIView().then {
-        $0.backgroundColor = .clear
-        $0.layer.borderWidth = 2
-        $0.layer.borderColor = UIColor.lightGray.cgColor
+    private lazy var completeButtonView = UIImageView().then {
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(completeButtonViewTapped))
+        
+        $0.isUserInteractionEnabled = true
+        $0.addGestureRecognizer(tapGR)
     }
     
     private let priorityLabel = UILabel().then {
@@ -43,12 +48,12 @@ final class TodoListTableViewCell: BaseTableViewCell {
     }
 
     override func draw(_ rect: CGRect) {
-        self.circleView.layer.cornerRadius = self.circleView.frame.width / 2
-        self.circleView.clipsToBounds = true
+        self.completeButtonView.layer.cornerRadius = self.completeButtonView.frame.width / 2
+        self.completeButtonView.clipsToBounds = true
     }
     
     override func configureHierarchy() {
-        self.contentView.addSubview(circleView)
+        self.contentView.addSubview(completeButtonView)
         self.contentView.addSubview(priorityLabel)
         self.contentView.addSubview(titleLabel)
         self.contentView.addSubview(memoLabel)
@@ -57,10 +62,10 @@ final class TodoListTableViewCell: BaseTableViewCell {
     }
     
     override func configureLayout() {
-        circleView.snp.makeConstraints { make in
+        completeButtonView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview()
-            make.size.equalTo(20)
+            make.size.equalTo(30)
         }
         
         priorityLabel.snp.makeConstraints { make in
@@ -90,10 +95,29 @@ final class TodoListTableViewCell: BaseTableViewCell {
     }
     
     func configureCellData(data: Todo) {
+        self.configureCompleteImage(isComplete: data.isComplete)
         self.priorityLabel.text = "!" * data.priority
         self.titleLabel.text = data.title
         self.memoLabel.text = data.memo
         self.dueDateLabel.text = data.dueDate
         self.tagLabel.text = (data.tag.isEmpty) ? "" : "#" + data.tag
+    }
+    
+    func configureCompleteImage(isComplete: Bool) {
+        let completeImage = isComplete ? "checkmark.circle" : "circle"
+        let tintColor: UIColor = isComplete ? .systemBlue : .lightGray
+
+        self.completeButtonView.image = UIImage(systemName: completeImage)
+        self.completeButtonView.tintColor = tintColor
+    }
+    
+    @objc private func completeButtonViewTapped() {
+        guard let tableView = superview as? UITableView, let indexPath = tableView.indexPath(for: self) else { return }
+
+        guard let delegate = tableView.delegate as? TodoListTableViewCellDelegate else {
+            return
+        }
+        
+        delegate.completeButtonViewTapped(idx: indexPath.row)
     }
 }

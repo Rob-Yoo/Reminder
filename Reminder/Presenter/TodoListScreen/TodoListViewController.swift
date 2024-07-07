@@ -86,29 +86,36 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let data = self.model.todoList[indexPath.row]
         let flagImage = (data.isFlag) ? "flag.fill" : "flag"
-        let flag = UIContextualAction(style: .normal, title: "깃발") { action, view, completion in
-            self.model.updateTodo(value: ["id": data.id, "isFlag": !data.isFlag])
+        
+        let detail = UIContextualAction(style: .normal, title: "세부사항") { [weak self] (_, _, _) in
+            let nextVC = TodoDetailViewController(todo: data)
+
+            self?.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        
+        let flag = UIContextualAction(style: .normal, title: "깃발") { [weak self] (_, _, _) in
+            self?.model.updateTodo(value: ["id": data.id, "isFlag": !data.isFlag])
         }
 
-        let delete = UIContextualAction(style: .destructive, title: "삭제") { action, view, completion in
+        let delete = UIContextualAction(style: .destructive, title: "삭제") { [weak self] (_, _, _) in
             let primaryKey = data.id
-            self.model.removeTodoList(primaryKey: primaryKey)
+            self?.model.removeTodoList(primaryKey: primaryKey)
         }
         
+        detail.backgroundColor = .systemGray
         flag.image = UIImage(systemName: flagImage)
         flag.backgroundColor = .systemYellow
-        return UISwipeActionsConfiguration(actions: [delete, flag])
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let todo = self.model.todoList[indexPath.row]
-        let nextVC = TodoDetailViewController(todo: todo)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        return UISwipeActionsConfiguration(actions: [delete, flag, detail])
     }
 }
 
 //MARK: - User Action Handling
-extension TodoListViewController {
+extension TodoListViewController: TodoListTableViewCellDelegate {
+    func completeButtonViewTapped(idx: Int) {
+        let todo = self.model.todoList[idx]
+        guard let cell = self.contentView.listTableView.cellForRow(at: IndexPath(row: idx, section: 0)) as? TodoListTableViewCell else { return }
+        
+        cell.configureCompleteImage(isComplete: !todo.isComplete)
+        self.model.updateTodo(value: ["id": todo.id, "isComplete": !todo.isComplete])
+    }
 }
