@@ -17,9 +17,14 @@ final class TodoOptionView: BaseView {
         $0.font = .systemFont(ofSize: 15)
     }
     
-    let contentLabel = UILabel().then {
+    lazy var contentLabel = UILabel().then {
         $0.textColor = .white
+        $0.textAlignment = .right
         $0.font = .systemFont(ofSize: 15)
+    }
+    
+    lazy var contentImage = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
     }
     
     private let arrowImageView = UIImageView().then {
@@ -37,21 +42,25 @@ final class TodoOptionView: BaseView {
         self.titleLabel.text = self.type.title
     }
     
-    override func configureHierarchy() {
+    private func configureTitleLabel() {
         self.addSubview(titleLabel)
-        self.addSubview(contentLabel)
-        self.addSubview(arrowImageView)
-    }
-    
-    override func configureLayout() {
+        
         titleLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(15)
             make.centerY.equalToSuperview()
         }
+    }
+    
+    override func configureLayout() {
+        let content = (self.type == .image) ? contentImage : contentLabel
         
-        contentLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
+        self.configureTitleLabel()
+        self.configureArrowImageView()
+        self.configureContent(content: content)
+    }
+    
+    private func configureArrowImageView() {
+        self.addSubview(arrowImageView)
         
         arrowImageView.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(-15)
@@ -59,4 +68,18 @@ final class TodoOptionView: BaseView {
             make.size.equalTo(15)
         }
     }
+    
+    private func configureContent(content: UIView) {
+        self.addSubview(content)
+        
+        content.snp.makeConstraints { make in
+            make.trailing.equalTo(arrowImageView.snp.leading).offset(-10)
+            make.verticalEdges.equalToSuperview().inset(5)
+            
+            if (self.type == .image) {
+                make.width.equalTo(content.snp.height)
+            }
+        }
+    }
+    
 }

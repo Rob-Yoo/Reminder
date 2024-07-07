@@ -8,7 +8,7 @@
 import Foundation
 
 enum OptionType {
-    case dueDate, tag, priority
+    case dueDate, tag, priority, image
     
     var title: String {
         switch self {
@@ -18,6 +18,8 @@ enum OptionType {
             return "태그"
         case .priority:
             return "우선 순위"
+        case .image:
+            return "이미지 추가"
         }
     }
 }

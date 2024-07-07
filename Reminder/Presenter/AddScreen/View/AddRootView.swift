@@ -31,6 +31,8 @@ final class AddRootView: BaseView {
     
     let priorityOptionView = TodoOptionView(type: .priority)
     
+    let imageOptionView = TodoOptionView(type: .image)
+    
     override func configureView() {
         self.backgroundColor = .customBackground
     }
@@ -41,6 +43,7 @@ final class AddRootView: BaseView {
         self.addSubview(dueDateOptionView)
         self.addSubview(tagOptionView)
         self.addSubview(priorityOptionView)
+        self.addSubview(imageOptionView)
     }
 
     override func configureLayout() {
@@ -70,6 +73,12 @@ final class AddRootView: BaseView {
         
         priorityOptionView.snp.makeConstraints { make in
             make.top.equalTo(tagOptionView.snp.bottom).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(60)
+        }
+        
+        imageOptionView.snp.makeConstraints { make in
+            make.top.equalTo(priorityOptionView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(60)
         }

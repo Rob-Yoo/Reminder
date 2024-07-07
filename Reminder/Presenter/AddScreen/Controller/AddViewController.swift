@@ -7,6 +7,7 @@
 
 import UIKit
 import Toast
+import PhotosUI
 
 final class AddViewController: BaseViewController<AddRootView> {
 
@@ -37,10 +38,12 @@ final class AddViewController: BaseViewController<AddRootView> {
         let dueDateTapGR = UITapGestureRecognizer(target: self, action: #selector(dueDateOptionViewTapped))
         let tagTapGR = UITapGestureRecognizer(target: self, action: #selector(tagOptionViewTapped))
         let priorityTapGR = UITapGestureRecognizer(target: self, action: #selector(priorityOptionViewTapped))
+        let imageTapGR = UITapGestureRecognizer(target: self, action: #selector(imageOptionViewTapped))
         
         self.contentView.dueDateOptionView.addGestureRecognizer(dueDateTapGR)
         self.contentView.tagOptionView.addGestureRecognizer(tagTapGR)
         self.contentView.priorityOptionView.addGestureRecognizer(priorityTapGR)
+        self.contentView.imageOptionView.addGestureRecognizer(imageTapGR)
     }
 
 }
@@ -61,6 +64,9 @@ extension AddViewController {
             let newTodo = self.model.todoBuilder.title(title).memo(memo).build()
 
             self.model.addTodoList(toDo: newTodo)
+            if let image = self.contentView.imageOptionView.contentImage.image {
+                self.saveImageToDocument(image: image, filename: "\(newTodo.id)")
+            }
             dismissHandler?()
             self.dismiss(animated: true)
         } else {
@@ -100,5 +106,29 @@ extension AddViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 
+    @objc private func imageOptionViewTapped() {
+        var config = PHPickerConfiguration()
+        let picker = PHPickerViewController(configuration: config)
+        
+        config.selectionLimit = 1
+        config.filter = .any(of: [.images])
+        picker.delegate = self
+        self.present(picker, animated: true)
+    }
+}
 
+extension AddViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        for result in results {
+            if result.itemProvider.canLoadObject(ofClass: UIImage.self) {
+                result.itemProvider.loadObject(ofClass: UIImage.self) {
+                    image, error in
+                    DispatchQueue.main.async {
+                        self.contentView.imageOptionView.contentImage.image = image as? UIImage
+                        picker.dismiss(animated: true)
+                    }
+                }
+            }
+        }
+    }
 }
