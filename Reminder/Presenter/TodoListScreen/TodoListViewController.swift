@@ -26,7 +26,7 @@ final class TodoListViewController: BaseViewController<TodoListRootView> {
     
     private func configureNavigationBar() {
         let filterButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: nil, action: nil)
-        
+
         filterButton.menu = makePullDownMenu()
         self.navigationItem.rightBarButtonItem = filterButton
     }
@@ -47,7 +47,6 @@ final class TodoListViewController: BaseViewController<TodoListRootView> {
     override func addUserAction() {
         self.contentView.listTableView.delegate = self
         self.contentView.listTableView.dataSource = self
-        self.contentView.addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     override func observeModel() {
@@ -105,10 +104,4 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: - User Action Handling
 extension TodoListViewController {
-    @objc private func addButtonTapped() {
-        let nextVC = AddViewController(model: self.model)
-        let nav = UINavigationController(rootViewController: nextVC)
-        
-        self.present(nav, animated: true)
-    }
 }

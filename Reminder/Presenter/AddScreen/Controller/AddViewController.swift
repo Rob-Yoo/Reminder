@@ -12,6 +12,8 @@ final class AddViewController: BaseViewController<AddRootView> {
 
     private let model: TodoListModel
     
+    var dismissHandler: (() -> Void)?
+    
     init(model: TodoListModel) {
         self.model = model
         super.init()
@@ -21,7 +23,7 @@ final class AddViewController: BaseViewController<AddRootView> {
         super.viewDidLoad()
         self.configureNavigationBar()
     }
-    
+
     private func configureNavigationBar() {
         let cancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancelButtonTapped))
         let addButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addButtonTapped))
@@ -46,6 +48,7 @@ final class AddViewController: BaseViewController<AddRootView> {
 //MARK: - User Action Handling
 extension AddViewController {
     @objc private func cancelButtonTapped() {
+        dismissHandler?()
         self.dismiss(animated: true)
     }
     
@@ -58,6 +61,7 @@ extension AddViewController {
             let newTodo = self.model.todoBuilder.title(title).memo(memo).build()
 
             self.model.addTodoList(toDo: newTodo)
+            dismissHandler?()
             self.dismiss(animated: true)
         } else {
             self.contentView.makeToast("제목을 입력해주세요!", duration: 1.0, position: .center)

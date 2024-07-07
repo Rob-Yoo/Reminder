@@ -17,10 +17,6 @@ final class TodoListRootView: BaseView {
         $0.font = .boldSystemFont(ofSize: 35)
     }
     
-    let addButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "plus.circle"), for: .normal)
-    }
-    
     let listTableView = UITableView(frame: .zero, style: .plain).then {
         $0.rowHeight = 80
         $0.showsVerticalScrollIndicator = false
@@ -34,7 +30,6 @@ final class TodoListRootView: BaseView {
     
     override func configureHierarchy() {
         self.addSubview(titleLabel)
-        self.addSubview(addButton)
         self.addSubview(listTableView)
     }
     
@@ -42,12 +37,6 @@ final class TodoListRootView: BaseView {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
             make.leading.equalTo(self.safeAreaLayoutGuide).offset(10)
-        }
-        
-        addButton.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
-            make.trailing.equalTo(self.safeAreaLayoutGuide).offset(-10)
-            make.size.equalTo(60)
         }
         
         listTableView.snp.makeConstraints { make in

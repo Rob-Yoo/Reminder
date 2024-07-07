@@ -38,6 +38,7 @@ final class MainViewController: BaseViewController<MainRootView> {
     override func addUserAction() {
         self.contentView.mainCollectionView.delegate = self
         self.contentView.mainCollectionView.dataSource = self
+        self.contentView.addTodoButton.addTarget(self, action: #selector(addTodoButtonTapped), for: .touchUpInside)
     }
     
     override func observeModel() {
@@ -50,6 +51,7 @@ final class MainViewController: BaseViewController<MainRootView> {
     }
 }
 
+//MARK: - UICollectionView Delegate/DataSource
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Category.allCases.count
@@ -76,5 +78,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let nextVC = TodoListViewController(model: TodoListModel())
         
         self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
+
+//MARK: - User Action Handling
+extension MainViewController {
+    @objc private func addTodoButtonTapped() {
+        let nextVC = AddViewController(model: TodoListModel())
+        let nav = UINavigationController(rootViewController: nextVC)
+        
+        nextVC.dismissHandler = { self.model.reloadData() }
+        self.present(nav, animated: true)
     }
 }

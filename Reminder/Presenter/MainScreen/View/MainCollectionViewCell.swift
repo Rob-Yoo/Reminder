@@ -45,7 +45,7 @@ final class MainCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(iconView.snp.bottom).offset(10)
+            make.bottom.equalToSuperview().offset(-10)
             make.leading.equalToSuperview().offset(10)
         }
         
@@ -55,7 +55,7 @@ final class MainCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func draw(_ rect: CGRect) {
-        self.iconView.layer.cornerRadius = self.iconView.frame.width / 2
+        self.iconView.layer.cornerRadius = self.iconView.bounds.width / 2
         self.iconView.clipsToBounds = true
     }
     
