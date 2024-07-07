@@ -48,4 +48,12 @@ final class TodoListModel {
             realm.create(Todo.self, value: value, update: .modified)
         }
     }
+    
+    func searchTodoList(searchText: String) {
+        let search = realm.objects(Todo.self).where {
+            $0.title.contains(searchText, options: .caseInsensitive) || $0.memo.contains(searchText, options: .caseInsensitive)
+        }
+
+        self.todoList = searchText.isEmpty ? realm.objects(Todo.self) : search
+    }
 }

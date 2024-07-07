@@ -47,6 +47,7 @@ final class TodoListViewController: BaseViewController<TodoListRootView> {
     override func addUserAction() {
         self.contentView.listTableView.delegate = self
         self.contentView.listTableView.dataSource = self
+        self.contentView.searchBar.delegate = self
     }
     
     override func observeModel() {
@@ -110,12 +111,16 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK: - User Action Handling
-extension TodoListViewController: TodoListTableViewCellDelegate {
+extension TodoListViewController: TodoListTableViewCellDelegate, UISearchBarDelegate {
     func completeButtonViewTapped(idx: Int) {
         let todo = self.model.todoList[idx]
         guard let cell = self.contentView.listTableView.cellForRow(at: IndexPath(row: idx, section: 0)) as? TodoListTableViewCell else { return }
         
         cell.configureCompleteImage(isComplete: !todo.isComplete)
         self.model.updateTodo(value: ["id": todo.id, "isComplete": !todo.isComplete])
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.model.searchTodoList(searchText: searchText)
     }
 }
