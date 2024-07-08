@@ -88,7 +88,7 @@ extension TodoListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let flag = UIContextualAction(style: .normal, title: "깃발") { [weak self] (_, _, _) in
-            self?.model.updateTodo(value: ["id": data.id, "isFlag": !data.isFlag])
+            self?.model.updateTodo(value: ["id": data.id, "isFlag": !data.isFlag], data: data, type: .Flag, isAddToCategory: !data.isFlag)
         }
 
         let delete = UIContextualAction(style: .destructive, title: "삭제") { [weak self] (_, _, _) in
@@ -110,7 +110,7 @@ extension TodoListViewController: TodoListTableViewCellDelegate, UISearchBarDele
         guard let cell = self.contentView.listTableView.cellForRow(at: IndexPath(row: idx, section: 0)) as? TodoListTableViewCell else { return }
         
         cell.configureCompleteImage(isComplete: !todo.isComplete)
-        self.model.updateTodo(value: ["id": todo.id, "isComplete": !todo.isComplete])
+        self.model.updateTodo(value: ["id": todo.id, "isComplete": !todo.isComplete], data: todo, type: .Complete, isAddToCategory: !todo.isComplete)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

@@ -61,11 +61,17 @@ final class TodoListModel {
         }
     }
     
-    func updateTodo(value: [String: Any]) {
+    func updateTodo(value: [String: Any], data: Todo, type: CategoryType, isAddToCategory: Bool) {
         do {
             try realm.write {
                 realm.create(Todo.self, value: value, update: .modified)
             }
+            if (isAddToCategory) {
+                self.addToCategory(type: type, data: data)
+            } else {
+                self.removeToCategory(type: type, data: data)
+            }
+            self.reloadData()
         } catch {
             print(error)
         }
@@ -81,5 +87,30 @@ final class TodoListModel {
     
     private func reloadData() {
         self.todoList = list.map { $0 }
+    }
+    
+    private func addToCategory(type: CategoryType, data: Todo) {
+        let todoList = realm.objects(Category.self)[type.idx].todoList
+        
+        do {
+            try realm.write {
+                todoList.append(data)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func removeToCategory(type: CategoryType, data: Todo) {
+        let todoList = realm.objects(Category.self)[type.idx].todoList
+        guard let idx = todoList.firstIndex(where: { $0.id == data.id }) else { return }
+        
+        do {
+            try realm.write {
+                todoList.remove(at: idx)
+            }
+        } catch {
+            print(error)
+        }
     }
 }
