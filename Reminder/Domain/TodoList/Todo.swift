@@ -17,6 +17,9 @@ final class Todo: Object {
     @Persisted var priority: Int
     @Persisted var isComplete: Bool = false
     @Persisted var isFlag: Bool = false
+    
+    @Persisted(originProperty: "todoList")
+    var category: LinkingObjects<Category>
 
     convenience init(title: String, memo: String, dueDate: String, tag: String, priority: Int) {
         self.init()

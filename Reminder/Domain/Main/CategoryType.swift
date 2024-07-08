@@ -1,5 +1,5 @@
 //
-//  Category.swift
+//  CategoryType.swift
 //  Reminder
 //
 //  Created by Jinyoung Yoo on 7/3/24.
@@ -7,12 +7,27 @@
 
 import UIKit
 
-enum Category: CaseIterable {
+enum CategoryType: CaseIterable {
     case Today
     case Schedule
     case Total
     case Flag
     case Complete
+    
+    var idx: Int {
+        switch self {
+        case .Today:
+            return 0
+        case .Schedule:
+            return 1
+        case .Total:
+            return 2
+        case .Flag:
+            return 3
+        case .Complete:
+            return 4
+        }
+    }
     
     var resource: (icon: UIImage?, title: String, bgColor: UIColor) {
         switch self {

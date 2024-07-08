@@ -57,13 +57,6 @@ final class TodoListViewController: BaseViewController<TodoListRootView> {
                 self?.contentView.listTableView.reloadData()
             }
             .store(in: &cancellable)
-        
-        self.model.todoList.objectWillChange
-            .receive(on: RunLoop.main)
-            .sink { [weak self] new in
-                self?.contentView.listTableView.reloadData()
-            }
-            .store(in: &cancellable)
     }
 }
 

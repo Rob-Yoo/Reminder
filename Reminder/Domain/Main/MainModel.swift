@@ -6,25 +6,33 @@
 //
 
 import Foundation
-import Combine
 import RealmSwift
 
 final class MainModel {
     let realm = try! Realm()
-    var todoList: Results<Todo> {
-        didSet {
-            self.totalCount = todoList.count
+    var category: Results<Category>
+
+    init() {
+        print(realm.configuration.fileURL)
+        self.category = realm.objects(Category.self)
+        if category.isEmpty {
+            CategoryType.allCases.forEach {
+                self.createItem(data: Category(title: $0.resource.title))
+            }
         }
     }
-
-    @Published var totalCount: Int
     
-    init() {
-        self.todoList = realm.objects(Todo.self)
-        self.totalCount = self.todoList.count
+    func createItem(data: Object) {
+        do {
+            try realm.write {
+                realm.add(data)
+            }
+        } catch {
+            print(error)
+        }
     }
     
     func reloadData() {
-        self.todoList = realm.objects(Todo.self)
+        self.category = realm.objects(Category.self)
     }
 }

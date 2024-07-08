@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CC324CC42C359EAC009BA31A /* TodoDetailRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC324CC32C359EAC009BA31A /* TodoDetailRootView.swift */; };
 		CC324CC62C359EC5009BA31A /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC324CC52C359EC5009BA31A /* TodoDetailViewController.swift */; };
+		CC3BFF1C2C3C120D005C45F2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3BFF1B2C3C120D005C45F2 /* Category.swift */; };
 		CC50FDD42C3A7629007AF3F4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC50FDD32C3A7629007AF3F4 /* UIViewController+Extension.swift */; };
 		CC85F8E22C33E82000D2B15C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85F8E12C33E82000D2B15C /* AppDelegate.swift */; };
 		CC85F8E42C33E82000D2B15C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC85F8E32C33E82000D2B15C /* SceneDelegate.swift */; };
@@ -38,7 +39,7 @@
 		CCA6A0802C357976006EE56E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA6A07F2C357976006EE56E /* MainModel.swift */; };
 		CCA6A0822C357E48006EE56E /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA6A0812C357E48006EE56E /* MainCollectionViewCell.swift */; };
 		CCA6A0842C357E72006EE56E /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA6A0832C357E72006EE56E /* BaseCollectionViewCell.swift */; };
-		CCA6A0862C35811C006EE56E /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA6A0852C35811C006EE56E /* Category.swift */; };
+		CCA6A0862C35811C006EE56E /* CategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA6A0852C35811C006EE56E /* CategoryType.swift */; };
 		CCAB37012C35312300D65854 /* TodoOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB37002C35312300D65854 /* TodoOptionView.swift */; };
 		CCAB37032C35320C00D65854 /* OptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB37022C35320C00D65854 /* OptionType.swift */; };
 		CCAB37082C3539AF00D65854 /* DueDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB37072C3539AF00D65854 /* DueDateViewController.swift */; };
@@ -47,7 +48,6 @@
 		CCAB370E2C353A1400D65854 /* PriorityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB370D2C353A1400D65854 /* PriorityView.swift */; };
 		CCAB37102C353A2000D65854 /* DueDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB370F2C353A2000D65854 /* DueDateView.swift */; };
 		CCAB37122C353A2A00D65854 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB37112C353A2A00D65854 /* TagView.swift */; };
-		CCAB37142C35428000D65854 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB37132C35428000D65854 /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +67,7 @@
 /* Begin PBXFileReference section */
 		CC324CC32C359EAC009BA31A /* TodoDetailRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailRootView.swift; sourceTree = "<group>"; };
 		CC324CC52C359EC5009BA31A /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
+		CC3BFF1B2C3C120D005C45F2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CC50FDD32C3A7629007AF3F4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		CC85F8DE2C33E82000D2B15C /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC85F8E12C33E82000D2B15C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +94,7 @@
 		CCA6A07F2C357976006EE56E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		CCA6A0812C357E48006EE56E /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		CCA6A0832C357E72006EE56E /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
-		CCA6A0852C35811C006EE56E /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		CCA6A0852C35811C006EE56E /* CategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryType.swift; sourceTree = "<group>"; };
 		CCAB37002C35312300D65854 /* TodoOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOptionView.swift; sourceTree = "<group>"; };
 		CCAB37022C35320C00D65854 /* OptionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionType.swift; sourceTree = "<group>"; };
 		CCAB37072C3539AF00D65854 /* DueDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDateViewController.swift; sourceTree = "<group>"; };
@@ -102,7 +103,6 @@
 		CCAB370D2C353A1400D65854 /* PriorityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityView.swift; sourceTree = "<group>"; };
 		CCAB370F2C353A2000D65854 /* DueDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDateView.swift; sourceTree = "<group>"; };
 		CCAB37112C353A2A00D65854 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
-		CCAB37132C35428000D65854 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				CC85F9112C3411BA00D2B15C /* ReusableProtocol.swift */,
-				CCAB37132C35428000D65854 /* Date+Extension.swift */,
 				CCA6A0762C357386006EE56E /* String+Extension.swift */,
 				CC50FDD32C3A7629007AF3F4 /* UIViewController+Extension.swift */,
 			);
@@ -250,7 +249,6 @@
 			children = (
 				CCA6A0792C357918006EE56E /* View */,
 				CCA6A07A2C357927006EE56E /* MainViewController.swift */,
-				CCA6A0852C35811C006EE56E /* Category.swift */,
 			);
 			path = MainScreen;
 			sourceTree = "<group>";
@@ -267,6 +265,8 @@
 		CCA6A07E2C357968006EE56E /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CC3BFF1B2C3C120D005C45F2 /* Category.swift */,
+				CCA6A0852C35811C006EE56E /* CategoryType.swift */,
 				CCA6A07F2C357976006EE56E /* MainModel.swift */,
 			);
 			path = Main;
@@ -378,15 +378,15 @@
 				CC85F91C2C3427B800D2B15C /* AddRootView.swift in Sources */,
 				CCA6A07B2C357927006EE56E /* MainViewController.swift in Sources */,
 				CC85F9082C33F7CE00D2B15C /* TodoListRootView.swift in Sources */,
-				CCA6A0862C35811C006EE56E /* Category.swift in Sources */,
+				CCA6A0862C35811C006EE56E /* CategoryType.swift in Sources */,
 				CC50FDD42C3A7629007AF3F4 /* UIViewController+Extension.swift in Sources */,
 				CCAB370E2C353A1400D65854 /* PriorityView.swift in Sources */,
 				CC85F91F2C3427CF00D2B15C /* AddViewController.swift in Sources */,
 				CCA6A0842C357E72006EE56E /* BaseCollectionViewCell.swift in Sources */,
 				CCAB37082C3539AF00D65854 /* DueDateViewController.swift in Sources */,
 				CCAB37102C353A2000D65854 /* DueDateView.swift in Sources */,
-				CCAB37142C35428000D65854 /* Date+Extension.swift in Sources */,
 				CC85F8E62C33E82000D2B15C /* TodoListViewController.swift in Sources */,
+				CC3BFF1C2C3C120D005C45F2 /* Category.swift in Sources */,
 				CCA6A0772C357386006EE56E /* String+Extension.swift in Sources */,
 				CC85F9042C33F67B00D2B15C /* BaseViewController.swift in Sources */,
 				CCA6A0722C356DC4006EE56E /* TodoBuilder.swift in Sources */,

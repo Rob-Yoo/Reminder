@@ -59,7 +59,7 @@ final class MainCollectionViewCell: BaseCollectionViewCell {
         self.iconView.clipsToBounds = true
     }
     
-    func configureCellData(category: Category, count: Int = 0) {
+    func configureCellData(category: CategoryType, count: Int = 0) {
         let resource = category.resource
 
         self.iconView.image = resource.icon

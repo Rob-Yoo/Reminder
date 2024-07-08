@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import Combine
 
 final class MainViewController: BaseViewController<MainRootView> {
 
     private let model: MainModel
-    private var cancellable = Set<AnyCancellable>()
     
     init(model: MainModel) {
         self.model = model
@@ -27,6 +25,7 @@ final class MainViewController: BaseViewController<MainRootView> {
         super.viewWillAppear(animated)
         
         self.model.reloadData()
+        self.contentView.mainCollectionView.reloadData()
     }
     
     private func configureNavigationBar() {
@@ -40,42 +39,30 @@ final class MainViewController: BaseViewController<MainRootView> {
         self.contentView.mainCollectionView.dataSource = self
         self.contentView.addTodoButton.addTarget(self, action: #selector(addTodoButtonTapped), for: .touchUpInside)
     }
-    
-    override func observeModel() {
-        self.model.$totalCount
-            .receive(on: RunLoop.main)
-            .sink { [weak self] count in
-                self?.contentView.mainCollectionView.reloadData()
-            }
-            .store(in: &cancellable)
-    }
 }
 
 //MARK: - UICollectionView Delegate/DataSource
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Category.allCases.count
+        return CategoryType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let category = Category.allCases[indexPath.item]
+        let category = CategoryType.allCases[indexPath.item]
+        let count = self.model.category[indexPath.item].todoList.count
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainCollectionViewCell.reusableIdentifier, for: indexPath) as? MainCollectionViewCell else {
             return UICollectionViewCell()
         }
         
-        if category == .Total {
-            let count = self.model.totalCount
-            cell.configureCellData(category: category, count: count)
-        } else {
-            cell.configureCellData(category: category)
-        }
+        cell.configureCellData(category: category, count: count)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let nextVC = TodoListViewController(model: TodoListModel())
+        let category = self.model.category[indexPath.item]
+        let nextVC = TodoListViewController(model: TodoListModel(category: category))
         
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -84,10 +71,14 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - User Action Handling
 extension MainViewController {
     @objc private func addTodoButtonTapped() {
-        let nextVC = AddViewController(model: TodoListModel())
+        let idx = CategoryType.Total.idx
+        let nextVC = AddViewController(model: TodoListModel(category: self.model.category[idx]))
         let nav = UINavigationController(rootViewController: nextVC)
         
-        nextVC.dismissHandler = { self.model.reloadData() }
+        nextVC.dismissHandler = {
+            self.model.reloadData()
+            self.contentView.mainCollectionView.reloadData()
+        }
         self.present(nav, animated: true)
     }
 }
